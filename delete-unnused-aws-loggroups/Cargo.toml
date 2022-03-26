@@ -1,0 +1,26 @@
+[package]
+name = "delete-unnused-aws-loggroups"
+version = "1.0.0"
+authors = ["Marc Mettke <marc@itmettke.de>"]
+edition = "2021"
+description = "Delete unused loggroups from AWS CloudWatch"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/mettke/delete-unnused-aws-loggroups"
+readme = "./README.md"
+keywords = ["lambda", "AWS", "CloudWatch", "log group"]
+categories = ["command-line-utilities"]
+
+[features]
+test = ["lambda-runtime-types/test"]
+
+[dependencies]
+anyhow = "1"
+async-trait = "0.1"
+lambda-runtime-types = { version = "0.6", default-features = false, features = ["rotate_rusoto"] }
+log = "0.4"
+rusoto_codebuild = { version = "0.47", default-features = false, features = ["rustls"] }
+rusoto_core = { version = "0.47", default-features = false, features = ["rustls"] }
+rusoto_lambda = { version = "0.47", default-features = false, features = ["rustls"] }
+rusoto_logs = { version = "0.47", default-features = false, features = ["rustls"] }
+simple_logger = "2"
+tokio = "1"

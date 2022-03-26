@@ -1,0 +1,16 @@
+{
+  "region": "eu-central-1",
+  "invocations": [
+    {
+      "security_hub_google_creds": {
+        "region": "eu-central-1",
+        "id": "<secret_name>"
+      },
+      "security_hub_scim_creds": {
+        "region": "eu-central-1",
+        "id": "<secret_name>"
+      },
+      "google_api_query_for_groups": "email:aws-*"
+    }
+  ]
+}

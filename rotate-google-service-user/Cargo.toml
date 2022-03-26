@@ -1,0 +1,26 @@
+[package]
+name = "rotate-google-service-user"
+version = "1.0.0"
+authors = ["Marc Mettke <marc@itmettke.de>"]
+edition = "2021"
+description = "Rotate Google Service User Credentials"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/mettke/rotate-google-service-user"
+readme = "./README.md"
+keywords = ["lambda", "secrets", "manager", "rotate", "google", "service-user", "credentials"]
+categories = ["command-line-utilities"]
+
+[features]
+test = ["lambda-runtime-types/test"]
+
+[dependencies]
+anyhow = "1"
+async-trait = "0.1"
+base64 = "0.13"
+jsonwebtoken = "8"
+lambda-runtime-types = { version = "0.6", default-features = false, features = ["rotate_rusoto"] }
+log = "0.4"
+reqwest = { version = "0.11", default-features = false, features = ["json", "rustls-tls"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+simple_logger = "2"

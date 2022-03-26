@@ -1,0 +1,9 @@
+{
+  "region": "eu-central-1",
+  "invocations": [
+    {
+      "bucket": "logs-684796567769",
+      "prefix": "cloudwatch/AWSLogs/o-ic5kxck8pc/479896654607/LogGroup/{region}/{year}/{month}/{day}/{group}"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+[workspace]
+resolver = "2"
+members = [
+    "aws-sso-google-sync",
+    "delete-unnused-aws-loggroups",
+    "export-loggroups-to-s3",
+    "rotate-google-service-user",
+]
