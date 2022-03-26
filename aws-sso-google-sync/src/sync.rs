@@ -1,9 +1,9 @@
 const AWS_SSO_USER_LIMIT: usize = 50;
 const AWS_SSO_GROUP_LIMIT: usize = 50;
 
-pub(crate) type Lookup<T> = std::collections::HashMap<String, T>;
+pub type Lookup<T> = std::collections::HashMap<String, T>;
 
-pub(crate) struct SyncOp<'a> {
+pub struct SyncOp<'a> {
     scim: &'a crate::aws::Scim<'a>,
     gadmin: &'a crate::google::Admin<'a>,
 

@@ -5,7 +5,7 @@ struct ListResponse<Inner> {
 }
 
 #[derive(Debug, serde::Deserialize, serde::Serialize)]
-pub(crate) struct Group {
+pub struct Group {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub(crate) id: Option<String>,
     #[serde(rename = "displayName")]
@@ -13,7 +13,7 @@ pub(crate) struct Group {
 }
 
 #[derive(Debug, serde::Deserialize, serde::Serialize)]
-pub(crate) struct User {
+pub struct User {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub(crate) id: Option<String>,
     #[serde(rename = "externalId")]
@@ -30,7 +30,7 @@ pub(crate) struct User {
 }
 
 #[derive(Debug, serde::Deserialize, serde::Serialize)]
-pub(crate) struct UserName {
+pub struct UserName {
     #[serde(rename = "formatted", skip_serializing_if = "Option::is_none")]
     pub(crate) formatted: Option<String>,
     #[serde(rename = "familyName")]
@@ -40,7 +40,7 @@ pub(crate) struct UserName {
 }
 
 #[derive(Debug, serde::Deserialize, serde::Serialize)]
-pub(crate) struct UserMail {
+pub struct UserMail {
     pub(crate) value: String,
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
     pub(crate) r#type: Option<String>,
@@ -49,13 +49,13 @@ pub(crate) struct UserMail {
 }
 
 #[derive(Debug, serde::Deserialize)]
-pub(crate) struct ScimCreds {
+pub struct ScimCreds {
     endpoint: String,
     access_token: String,
 }
 
 #[derive(Debug)]
-pub(crate) struct Scim<'a> {
+pub struct Scim<'a> {
     secret: &'a ScimCreds,
     client: reqwest::Client,
 }

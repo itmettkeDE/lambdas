@@ -9,14 +9,14 @@ struct Members {
 }
 
 #[derive(Debug, serde::Deserialize)]
-pub(crate) struct Member {
+pub struct Member {
     pub(crate) email: String,
     #[serde(rename = "type")]
     pub(crate) r#type: MemberType,
 }
 
 #[derive(Debug, serde::Deserialize, PartialEq, Eq)]
-pub(crate) enum MemberType {
+pub enum MemberType {
     #[serde(rename = "USER")]
     User,
     #[serde(other)]
@@ -31,7 +31,7 @@ struct Groups {
 }
 
 #[derive(Debug, serde::Deserialize)]
-pub(crate) struct Group {
+pub struct Group {
     pub(crate) id: String,
     pub(crate) email: String,
 }
@@ -44,7 +44,7 @@ struct Users {
 }
 
 #[derive(Debug, Clone, serde::Deserialize)]
-pub(crate) struct User {
+pub struct User {
     pub(crate) id: String,
     #[serde(rename = "primaryEmail")]
     pub(crate) primary_email: String,
@@ -56,7 +56,7 @@ pub(crate) struct User {
 }
 
 #[derive(Debug, Clone, serde::Deserialize)]
-pub(crate) struct UserName {
+pub struct UserName {
     #[serde(rename = "fullName")]
     pub(crate) full_name: String,
     #[serde(rename = "familyName")]
@@ -66,7 +66,7 @@ pub(crate) struct UserName {
 }
 
 #[derive(Debug, Clone, serde::Deserialize)]
-pub(crate) struct UserMail {
+pub struct UserMail {
     pub(crate) address: String,
     pub(crate) primary: Option<bool>,
     #[serde(rename = "type")]
@@ -89,7 +89,7 @@ struct JwtClaims<'a> {
 }
 
 #[derive(Debug, serde::Deserialize)]
-pub(crate) struct AdminCreds {
+pub struct AdminCreds {
     mail: String,
     credential_json: CredentialJsonTypes,
 }
@@ -97,13 +97,13 @@ pub(crate) struct AdminCreds {
 #[derive(Debug, serde::Deserialize)]
 #[serde(untagged)]
 #[allow(variant_size_differences)]
-pub(crate) enum CredentialJsonTypes {
+pub enum CredentialJsonTypes {
     String(String),
     Json(CredentialJson),
 }
 
 #[derive(Debug, serde::Deserialize)]
-pub(crate) struct CredentialJson {
+pub struct CredentialJson {
     private_key_id: String,
     private_key: String,
     token_uri: String,
@@ -111,7 +111,7 @@ pub(crate) struct CredentialJson {
 }
 
 #[derive(Debug)]
-pub(crate) struct Admin<'a> {
+pub struct Admin<'a> {
     client: reqwest::Client,
     token: String,
     domain: &'a str,

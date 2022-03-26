@@ -1,6 +1,6 @@
 /// Secret Manager Client
 #[derive(Clone)]
-pub(crate) struct Smc {
+pub struct Smc {
     client: rusoto_secretsmanager::SecretsManagerClient,
 }
 

@@ -1,9 +1,9 @@
 mod scim;
 mod smc;
 
-pub(crate) use scim::{Group, Scim, ScimCreds, User, UserMail, UserName};
+pub use scim::{Group, Scim, ScimCreds, User, UserMail, UserName};
 
-pub(crate) async fn get_secret_from_secret_manager<S: serde::de::DeserializeOwned>(
+pub async fn get_secret_from_secret_manager<S: serde::de::DeserializeOwned>(
     secret: &super::event::Secret,
 ) -> anyhow::Result<S> {
     use anyhow::Context;

@@ -34,52 +34,8 @@
 //! ```
 //!
 
-#![warn(
-    absolute_paths_not_starting_with_crate,
-    anonymous_parameters,
-    deprecated_in_future,
-    elided_lifetimes_in_paths,
-    explicit_outlives_requirements,
-    indirect_structural_match,
-    keyword_idents,
-    macro_use_extern_crate,
-    meta_variable_misuse,
-    missing_copy_implementations,
-    missing_crate_level_docs,
-    missing_debug_implementations,
-    missing_docs,
-    missing_doc_code_examples,
-    non_ascii_idents,
-    private_doc_tests,
-    trivial_casts,
-    trivial_numeric_casts,
-    unaligned_references,
-    unreachable_pub,
-    unsafe_code,
-    unstable_features,
-    unused_crate_dependencies,
-    unused_extern_crates,
-    unused_import_braces,
-    unused_lifetimes,
-    unused_qualifications,
-    unused_results,
-    variant_size_differences
-)]
-#![warn(
-    clippy::cargo,
-    clippy::complexity,
-    clippy::correctness,
-    clippy::nursery,
-    clippy::perf,
-    clippy::style
-)]
-#![allow(
-    clippy::future_not_send,
-    clippy::multiple_crate_versions,
-    clippy::redundant_pub_crate,
-    clippy::wildcard_dependencies
-)]
-#![cfg_attr(docsrs, feature(doc_cfg))]
+#![deny(clippy::all, clippy::nursery)]
+#![deny(nonstandard_style, rust_2018_idioms, unused_crate_dependencies)]
 
 mod google;
 

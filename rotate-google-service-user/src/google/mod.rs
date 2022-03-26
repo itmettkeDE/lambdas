@@ -1,3 +1,3 @@
 mod iam;
 
-pub(crate) use iam::{CredentialJson, CredentialJsonTypes, Iam};
+pub use iam::{CredentialJson, CredentialJsonTypes, Iam};

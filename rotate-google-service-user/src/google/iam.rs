@@ -2,12 +2,12 @@ const ENDPOINT: &str = "https://iam.googleapis.com/v1";
 const SCOPES: &str = "https://www.googleapis.com/auth/iam";
 
 #[derive(Debug, serde::Deserialize, serde::Serialize, PartialEq, Eq)]
-pub(crate) struct Permissions {
+pub struct Permissions {
     permissions: Vec<std::borrow::Cow<'static, str>>,
 }
 
 #[derive(Debug, serde::Deserialize)]
-pub(crate) struct Credentials {
+pub struct Credentials {
     #[serde(rename = "privateKeyData")]
     pub(crate) private_key_data: String,
 }
@@ -30,13 +30,13 @@ struct JwtClaims<'a> {
 #[derive(Debug, Clone, serde::Deserialize, serde::Serialize)]
 #[serde(untagged)]
 #[allow(variant_size_differences)]
-pub(crate) enum CredentialJsonTypes {
+pub enum CredentialJsonTypes {
     String(String),
     Json(CredentialJson),
 }
 
 #[derive(Debug, Clone, serde::Deserialize, serde::Serialize)]
-pub(crate) struct CredentialJson {
+pub struct CredentialJson {
     pub(crate) private_key_id: PrivateKeyId,
     private_key: String,
     token_uri: String,
@@ -47,10 +47,10 @@ pub(crate) struct CredentialJson {
 
 #[repr(transparent)]
 #[derive(Debug, Clone, serde::Deserialize, serde::Serialize)]
-pub(crate) struct PrivateKeyId(pub(crate) String);
+pub struct PrivateKeyId(pub(crate) String);
 
 #[derive(Debug)]
-pub(crate) struct Iam {
+pub struct Iam {
     client: reqwest::Client,
     token: String,
     client_email: String,

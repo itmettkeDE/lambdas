@@ -1,17 +1,17 @@
 #[derive(Debug, Clone, serde::Deserialize)]
-pub(crate) struct Secret {
+pub struct Secret {
     pub(crate) region: String,
     pub(crate) id: String,
 }
 
 #[derive(Debug, Copy, Clone, serde::Deserialize)]
-pub(crate) enum SyncStrategie {
+pub enum SyncStrategie {
     AllUsers,
     GroupMembersOnly,
 }
 
 #[derive(Debug, serde::Deserialize)]
-pub(crate) struct Event {
+pub struct Event {
     security_hub_google_creds: Option<Secret>,
     security_hub_scim_creds: Option<Secret>,
     google_api_query_for_users: Option<String>,
