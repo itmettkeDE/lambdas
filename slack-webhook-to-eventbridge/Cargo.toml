@@ -1,0 +1,32 @@
+[package]
+name = "slack-webhook-to-eventbridge"
+version = "1.0.0"
+authors = ["Marc Mettke <marc@itmettke.de>"]
+edition = "2021"
+description = "WebAPI Lambda compatible with Slack Webhook. Expects a Slack event and sends it to EventBridge"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/itmettkeDE/lambdas"
+readme = "./README.md"
+keywords = ["lambda", "slack", "webhook", "eventbridge"]
+categories = ["command-line-utilities"]
+
+[features]
+test = ["lambda-runtime-types/test"]
+
+[dependencies]
+anyhow = "1"
+async-trait = "0.1"
+aws-config = { version = "0.9", features = ["rustls"] }
+aws-sdk-eventbridge = { version = "0.9", features = ["rustls"] }
+aws-sdk-secretsmanager = { version = "0.9", features = ["rustls"] }
+hex = "0.4"
+hmac = "0.12"
+http = "0.2"
+http-serde = "1"
+lambda-runtime-types = { version = "0.6", default-features = false, features = ["rotate_rusoto"] }
+log = "0.4"
+query_map = { version = "0.4", features = ["serde"] }
+sha2 = "0.10"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+simple_logger = "2"
