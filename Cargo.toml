@@ -5,4 +5,5 @@ members = [
     "delete-unnused-aws-loggroups",
     "export-loggroups-to-s3",
     "rotate-google-service-user",
+    "slack-webhook-to-eventbridge",
 ]
