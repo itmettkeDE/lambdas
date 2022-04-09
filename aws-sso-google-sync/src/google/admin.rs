@@ -176,7 +176,7 @@ impl<'a> Admin<'a> {
     ) -> anyhow::Result<String> {
         use anyhow::Context;
 
-        Ok(client
+        client
             .request(reqwest::Method::POST, token_url)
             .header("Content-Type", "application/x-www-form-urlencoded")
             .form(&[
@@ -191,7 +191,7 @@ impl<'a> Admin<'a> {
             .json::<AuthToken>()
             .await
             .map(|d| d.access_token)
-            .context("Could not parse result from Google Auth Url")?)
+            .context("Could not parse result from Google Auth Url")
     }
 
     pub(crate) async fn list_users(
