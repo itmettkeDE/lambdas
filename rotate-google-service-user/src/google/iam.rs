@@ -111,7 +111,7 @@ impl Iam {
     ) -> anyhow::Result<String> {
         use anyhow::Context;
 
-        Ok(client
+        client
             .request(reqwest::Method::POST, token_url)
             .header("Content-Type", "application/x-www-form-urlencoded")
             .form(&[
@@ -126,7 +126,7 @@ impl Iam {
             .json::<AuthToken>()
             .await
             .map(|d| d.access_token)
-            .context("Could not parse result from Google Auth Url")?)
+            .context("Could not parse result from Google Auth Url")
     }
 
     pub(crate) async fn test_permission(&self) -> anyhow::Result<()> {
