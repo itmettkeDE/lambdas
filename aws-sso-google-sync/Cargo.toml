@@ -1,6 +1,6 @@
 [package]
 name = "aws-sso-google-sync"
-version = "1.0.2"
+version = "1.0.3"
 authors = ["Marc Mettke <marc@itmettke.de>"]
 edition = "2021"
 description = "Syncs Users and Groups from Google Workspace to AWS SSO"
@@ -21,8 +21,8 @@ lambda-runtime-types = "0.6"
 log = "0.4"
 regex = "1"
 reqwest = { version = "0.11", default-features = false, features = ["json", "rustls-tls"] }
-rusoto_core = { version = "0.47", default-features = false, features = ["rustls"] }
-rusoto_secretsmanager = { version = "0.47", default-features = false, features = ["rustls"] }
+rusoto_core = { version = "0.48", default-features = false, features = ["rustls"] }
+rusoto_secretsmanager = { version = "0.48", default-features = false, features = ["rustls"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 simple_logger = "2"
