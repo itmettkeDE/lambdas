@@ -1,6 +1,6 @@
 [package]
 name = "rotate-google-service-user"
-version = "1.0.5"
+version = "1.0.6"
 authors = ["Marc Mettke <marc@itmettke.de>"]
 edition = "2021"
 description = "Rotate Google Service User Credentials"
