@@ -1,6 +1,6 @@
 [package]
 name = "export-loggroups-to-s3"
-version = "1.0.6"
+version = "1.0.7"
 authors = ["Marc Mettke <marc@itmettke.de>"]
 edition = "2021"
 description = "Exports CloudWatch LogGroups to S3 once a day"
