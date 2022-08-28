@@ -6,3 +6,6 @@ members = [
     "export-loggroups-to-s3",
     "rotate-google-service-user",
 ]
+
+[profile.release]
+strip = true

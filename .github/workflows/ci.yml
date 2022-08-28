@@ -104,11 +104,6 @@ jobs:
               NAME=${dir%/}
               cp "./target/${toolchain}/release/${NAME}" bootstrap
               cp "${NAME}/README.md" README.md
-              if [ "${toolchain}" = "aarch64-unknown-linux-musl" ]; then
-                ./aarch64-linux-musl-cross/bin/aarch64-linux-musl-strip bootstrap
-              else
-                strip bootstrap
-              fi
               zip "${NAME}-${ARCH}.zip" bootstrap LICENSE-APACHE LICENSE-MIT README.md
             done
           done
