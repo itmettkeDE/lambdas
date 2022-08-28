@@ -1,4 +1,11 @@
-//! This tool removes log groups which are no longer in use
+//! This tool removes log groups created by AWS services which
+//! are no longer in use. This is done by checking whether the
+//! resources for a given Loggroup still exists (like a Lambda
+//! function). Loggroups created by other services (with other prefixes or no prefixes) are left untouched.
+//! 
+//! Currently supported servics:
+//! * Lambda (`/aws/lambda/`)
+//! * CodeBuild (`/aws/codebuild/`)
 //!
 //! # Setup
 //!
