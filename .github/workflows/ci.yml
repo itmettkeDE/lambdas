@@ -36,31 +36,6 @@ jobs:
           components: rustfmt, clippy
           override: true
 
-      - name: Install Rust stable (Arm64)
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          target: aarch64-unknown-linux-musl
-          components: rustfmt, clippy
-          profile: minimal
-          override: true
-
-      - name: Set up an ARM-specific cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            aarch64-linux-musl-cross
-          key: ${{ runner.os }}-${{ runner.arch }} }}-arm
-
-      - name: Install Packages
-        run: sudo apt-get install --assume-yes --no-install-recommends musl-tools
-
-      - name: Install the toolchain for cross-compiling to aarch64 with musl
-        run: |
-          if [ -d "$GITHUB_WORKSPACE/aarch64-linux-musl-cross" ]; then exit 0; fi
-          curl -fSsL https://musl.cc/aarch64-linux-musl-cross.tgz | tar -xzvf-
-          echo "$GITHUB_WORKSPACE/aarch64-linux-musl-cross/bin" >> $GITHUB_PATH
-
       - name: Set up a Rust-specific cache
         uses: actions/cache@v3
         with:
@@ -116,6 +91,7 @@ jobs:
         with:
           command: build
           args: --target aarch64-unknown-linux-musl --release
+          use-cross: true
 
       - name: Package zips
         run: |
