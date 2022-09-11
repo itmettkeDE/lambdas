@@ -1,6 +1,6 @@
 [package]
 name = "aws-sso-google-sync"
-version = "1.0.11"
+version = "1.0.12"
 authors = ["Marc Mettke <marc@itmettke.de>"]
 edition = "2021"
 description = "Syncs Users and Groups from Google Workspace to AWS SSO"
