@@ -1,6 +1,6 @@
 [package]
 name = "export-loggroups-to-s3"
-version = "1.0.13"
+version = "1.0.14"
 authors = ["Marc Mettke <marc@itmettke.de>"]
 edition = "2021"
 description = "Exports CloudWatch LogGroups to S3 once a day"
@@ -25,5 +25,5 @@ rusoto_lambda = { version = "0.48", default-features = false, features = ["rustl
 rusoto_logs = { version = "0.48", default-features = false, features = ["rustls"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-simple_logger = "2"
+simple_logger = "4"
 tokio = "1"
