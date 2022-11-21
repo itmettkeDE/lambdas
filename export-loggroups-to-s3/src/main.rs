@@ -259,8 +259,10 @@ impl<'a> lambda_runtime_types::Runner<'a, (), event::Event, ()> for Runner {
 
         // Start and end time of export
         let export_date = invoke_time_backup.date() - chrono::Duration::days(1);
-        let export_start_time = chrono::NaiveTime::from_hms_milli(0, 0, 0, 0);
-        let export_end_time = chrono::NaiveTime::from_hms_milli(23, 59, 59, 999);
+        let export_start_time = chrono::NaiveTime::from_hms_milli_opt(0, 0, 0, 0)
+            .context("Invalid Start Time operation")?;
+        let export_end_time = chrono::NaiveTime::from_hms_milli_opt(23, 59, 59, 999)
+            .context("Invalid End Time operation")?;
         let export_start = chrono::NaiveDateTime::new(export_date, export_start_time);
         let export_end = chrono::NaiveDateTime::new(export_date, export_end_time);
 
