@@ -88,7 +88,7 @@ checksum = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f55e3529ffa43161b97fa"
 
 [[package]]
 name = "aws-sso-google-sync"
-version = "1.0.16"
+version = "1.1.0"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -253,7 +253,7 @@ dependencies = [
 
 [[package]]
 name = "delete-unnused-aws-loggroups"
-version = "1.0.16"
+version = "1.1.0"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -335,7 +335,7 @@ dependencies = [
 
 [[package]]
 name = "export-loggroups-to-s3"
-version = "1.0.16"
+version = "1.1.0"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -1105,7 +1105,7 @@ dependencies = [
 
 [[package]]
 name = "rotate-google-service-user"
-version = "1.0.16"
+version = "1.1.0"
 dependencies = [
  "anyhow",
  "async-trait",
