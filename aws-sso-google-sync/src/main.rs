@@ -192,7 +192,7 @@ impl<'a> lambda_runtime_types::Runner<'a, (), event::Event, ()> for Runner {
         let log_level = std::env::var(ENV_VAR_LOG_LEVEL);
         let log_level = log_level.as_ref().map(AsRef::as_ref).unwrap_or("info");
         let log_level = log::LevelFilter::from_str(log_level)
-            .with_context(|| format!("Invalid log_level: {}", log_level))?;
+            .with_context(|| format!("Invalid log_level: {log_level}"))?;
         simple_logger::SimpleLogger::new()
             .with_level(log_level)
             .init()

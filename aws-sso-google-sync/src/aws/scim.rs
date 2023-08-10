@@ -258,9 +258,9 @@ impl<'a> Scim<'a> {
                 .await
                 .context("Could not parse result from AWS SCIM (get_group)")
                 .and_then(|mut d| {
-                    d.resources.pop().with_context(|| {
-                        format!("Unable to find group with name: {}", display_name)
-                    })
+                    d.resources
+                        .pop()
+                        .with_context(|| format!("Unable to find group with name: {display_name}"))
                 });
         }
     }

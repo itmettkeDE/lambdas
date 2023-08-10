@@ -39,14 +39,14 @@ impl Smc {
                 continue;
             }
             break res
-                .with_context(|| format!("Unable to fetch SecretValue with id: {}", secret_id))?;
+                .with_context(|| format!("Unable to fetch SecretValue with id: {secret_id}"))?;
         };
         let inner = match (secret_value.secret_string, secret_value.secret_binary) {
             (Some(string), _) => serde_json::from_str(&string),
             (_, Some(bytes)) => serde_json::from_slice(&bytes),
-            _ => anyhow::bail!("Neither secret_string nor secret_binary is set for id: {}", secret_id),
+            _ => anyhow::bail!("Neither secret_string nor secret_binary is set for id: {secret_id}"),
         }
-        .with_context(|| format!("Unable to parse secret value. Value does not confirm to required structure. Id: {}", secret_id))?;
+        .with_context(|| format!("Unable to parse secret value. Value does not confirm to required structure. Id: {secret_id}"))?;
         Ok(inner)
     }
 

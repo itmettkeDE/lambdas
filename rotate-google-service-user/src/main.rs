@@ -56,7 +56,7 @@ impl<'a> lambda_runtime_types::rotate::RotateRunner<'a, (), serde_json::Value> f
         let log_level = std::env::var(ENV_VAR_LOG_LEVEL);
         let log_level = log_level.as_ref().map(AsRef::as_ref).unwrap_or("info");
         let log_level = log::LevelFilter::from_str(log_level)
-            .with_context(|| format!("Invalid log_level: {}", log_level))?;
+            .with_context(|| format!("Invalid log_level: {log_level}"))?;
         simple_logger::SimpleLogger::new()
             .with_level(log_level)
             .init()
@@ -70,14 +70,17 @@ impl<'a> lambda_runtime_types::rotate::RotateRunner<'a, (), serde_json::Value> f
         _smc: &lambda_runtime_types::rotate::Smc,
     ) -> anyhow::Result<lambda_runtime_types::rotate::SecretContainer<serde_json::Value>> {
         use anyhow::Context;
+        use base64::Engine;
 
         let value = get_mut_json_entry(&mut secret_cur)?;
         let credential_json = std::mem::replace(value, serde_json::Value::Null);
         let iam = google::Iam::new(credential_json).await?;
         let new_key = iam.create_key().await?;
-        let new_key = base64::decode(new_key.private_key_data).context(
-            "Unable to base64 decode the private_key_data of the new key returned by google",
-        )?;
+        let new_key = base64::prelude::BASE64_STANDARD
+            .decode(new_key.private_key_data)
+            .context(
+                "Unable to base64 decode the private_key_data of the new key returned by google",
+            )?;
         let new_key: google::CredentialJson = serde_json::from_slice(&new_key)
             .context("Unable to parse the credentials. Not a valid json object")?;
         *value = serde_json::json!(google::CredentialJsonTypes::Json(new_key));
@@ -138,7 +141,7 @@ fn get_mut_json_entry(value: &mut serde_json::Value) -> anyhow::Result<&mut serd
     let json_path = std::env::var(ENV_VAR_JSON_PATH);
     let json_path = json_path.as_deref().unwrap_or("[]");
     let json_path: JsonPath = serde_json::from_str(json_path)
-        .with_context(|| format!("Unable to parse JSON_PATH env variable. {} does not conform to the expected json structure.", json_path))?;
+        .with_context(|| format!("Unable to parse JSON_PATH env variable. {json_path} does not conform to the expected json structure."))?;
 
     let mut res_value = value;
     for path_element in json_path {
@@ -146,12 +149,12 @@ fn get_mut_json_entry(value: &mut serde_json::Value) -> anyhow::Result<&mut serd
             JsonPathElement::Key(ref key) => {
                 res_value = res_value
                     .get_mut(key)
-                    .with_context(|| format!("Json Object does not contain key: {}", key))?;
+                    .with_context(|| format!("Json Object does not contain key: {key}"))?;
             }
             JsonPathElement::Index(index) => {
                 res_value = res_value
                     .get_mut(index)
-                    .with_context(|| format!("Json Array does not contain index: {}", index))?;
+                    .with_context(|| format!("Json Array does not contain index: {index}"))?;
             }
         }
     }

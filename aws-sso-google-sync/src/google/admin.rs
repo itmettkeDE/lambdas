@@ -90,6 +90,8 @@ struct JwtClaims<'a> {
 
 #[derive(Debug, serde::Deserialize)]
 pub struct AdminCreds {
+    #[serde(default)]
+    customer_id: Option<String>,
     mail: String,
     credential_json: CredentialJsonTypes,
 }
@@ -114,6 +116,7 @@ pub struct CredentialJson {
 pub struct Admin<'a> {
     client: reqwest::Client,
     token: String,
+    customer_id: Option<&'a str>,
     domain: &'a str,
 }
 
@@ -141,6 +144,7 @@ impl<'a> Admin<'a> {
         Ok(Self {
             client,
             token,
+            customer_id: secret.customer_id.as_deref(),
             domain,
         })
     }
@@ -212,14 +216,16 @@ impl<'a> Admin<'a> {
             if let Some(query) = query {
                 queries.push(("query", String::from(query)));
             }
+            if let Some(customer_id) = self.customer_id {
+                queries.push(("customer", String::from(customer_id)));
+            } else {
+                queries.push(("domain", String::from(self.domain)));
+            }
             let res = self
                 .client
                 .request(
                     reqwest::Method::GET,
-                    &format!(
-                        "{}/users?domain={}&showDeleted={}",
-                        ENDPOINT, self.domain, deleted
-                    ),
+                    &format!("{ENDPOINT}/users?showDeleted={deleted}"),
                 )
                 .query(&queries)
                 .header("Authorization", format!("Bearer {}", &self.token))
@@ -312,10 +318,7 @@ impl<'a> Admin<'a> {
                 .client
                 .request(
                     reqwest::Method::GET,
-                    &format!(
-                        "{}/groups/{}/members?includeDerivedMembership=true",
-                        ENDPOINT, group_id
-                    ),
+                    &format!("{ENDPOINT}/groups/{group_id}/members?includeDerivedMembership=true",),
                 )
                 .query(query)
                 .header("Authorization", format!("Bearer {}", &self.token))
