@@ -34,7 +34,7 @@ impl Event {
         }
         if let Ok(env) = std::env::var(crate::ENV_VAR_SH_GOOGLE_CREDS) {
             return serde_json::from_str(&env)
-                .with_context(|| format!("{} is not a valid json object.", env));
+                .with_context(|| format!("{env} is not a valid json object."));
         }
         bail!("Either the lambda event must contain an security_hub_google_creds object or the env variable {}, must be defined.", crate::ENV_VAR_SH_GOOGLE_CREDS)
     }
@@ -49,7 +49,7 @@ impl Event {
         }
         if let Ok(env) = std::env::var(crate::ENV_VAR_SH_SCIM_CREDS) {
             return serde_json::from_str(&env)
-                .with_context(|| format!("{} is not a valid json object.", env));
+                .with_context(|| format!("{env} is not a valid json object."));
         }
         bail!("Either the lambda event must contain an security_hub_scim_creds object or the env variable {}, must be defined.", crate::ENV_VAR_SH_SCIM_CREDS)
     }
@@ -190,7 +190,7 @@ impl Event {
         }
         if let Ok(env) = std::env::var(crate::ENV_VAR_SYNC_STRATEGIE) {
             return serde_json::from_str(&env)
-                .with_context(|| format!("{} is not a valid sync strategie.", env));
+                .with_context(|| format!("{env} is not a valid sync strategie"));
         }
         Ok(SyncStrategie::GroupMembersOnly)
     }

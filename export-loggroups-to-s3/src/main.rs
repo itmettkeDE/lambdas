@@ -316,7 +316,7 @@ impl<'a> lambda_runtime_types::Runner<'a, (), event::Event, ()> for Runner {
                     .await?;
                 break;
             }
-            println!("Querying info for LogGroup {}", group);
+            println!("Querying info for LogGroup {group}");
             if include_tags.is_some() || exclude_tags.is_some() {
                 let tags = cloudwatch.get_tags(&group).await?;
                 if let Some(ref include_tags) = include_tags {
@@ -324,7 +324,7 @@ impl<'a> lambda_runtime_types::Runner<'a, (), event::Event, ()> for Runner {
                         .iter()
                         .any(|tag| tags.get(&tag.name) == Some(&tag.value))
                     {
-                        println!("Skipping LogGroup {} as it is missing required tags", group);
+                        println!("Skipping LogGroup {group} as it is missing required tags");
                         continue;
                     }
                 }
@@ -333,10 +333,7 @@ impl<'a> lambda_runtime_types::Runner<'a, (), event::Event, ()> for Runner {
                         .iter()
                         .any(|tag| tags.get(&tag.name) == Some(&tag.value))
                     {
-                        println!(
-                            "Skipping LogGroup {} as has a tag on the excluded lists",
-                            group
-                        );
+                        println!("Skipping LogGroup {group} as has a tag on the excluded lists",);
                         continue;
                     }
                 }
@@ -347,11 +344,11 @@ impl<'a> lambda_runtime_types::Runner<'a, (), event::Event, ()> for Runner {
                 .map(|t| t < export_start.timestamp_millis())
                 .unwrap_or(true)
             {
-                println!("Skipping LogGroup {} due to no new log entries", group);
+                println!("Skipping LogGroup {group} due to no new log entries");
                 continue;
             }
 
-            println!("Trying to create export for LogGroup {}", group);
+            println!("Trying to create export for LogGroup {group}");
             let prefix = prefix.replace("{group}", group.trim_start_matches('/'));
             let task_name = generate_task_name();
             let task_id = cloudwatch
@@ -364,10 +361,7 @@ impl<'a> lambda_runtime_types::Runner<'a, (), event::Event, ()> for Runner {
                     &task_name,
                 )
                 .await?;
-            println!(
-                "Created export for LogGroup {} with name {} and id {}",
-                group, task_name, task_id
-            );
+            println!("Created export for LogGroup {group} with name {task_name} and id {task_id}",);
         }
         Ok(())
     }
@@ -379,7 +373,7 @@ impl<'a> lambda_runtime_types::Runner<'a, (), event::Event, ()> for Runner {
         let log_level = std::env::var(ENV_VAR_LOG_LEVEL);
         let log_level = log_level.as_ref().map(AsRef::as_ref).unwrap_or("info");
         let log_level = log::LevelFilter::from_str(log_level)
-            .with_context(|| format!("Invalid log_level: {}", log_level))?;
+            .with_context(|| format!("Invalid log_level: {log_level}"))?;
         simple_logger::SimpleLogger::new()
             .with_level(log_level)
             .init()
