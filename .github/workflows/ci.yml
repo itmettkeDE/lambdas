@@ -40,7 +40,7 @@ jobs:
         run: sudo apt-get install --assume-yes --no-install-recommends musl-tools
 
       - name: Set up a Rust-specific cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.cargo
