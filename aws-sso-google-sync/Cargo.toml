@@ -20,7 +20,7 @@ jsonwebtoken = "8"
 lambda-runtime-types = "0.6"
 log = "0.4"
 regex = "1"
-reqwest = { version = "0.11", default-features = false, features = ["json", "rustls-tls"] }
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
 rusoto_core = { version = "0.48", default-features = false, features = ["rustls"] }
 rusoto_secretsmanager = { version = "0.48", default-features = false, features = ["rustls"] }
 serde = { version = "1", features = ["derive"] }
